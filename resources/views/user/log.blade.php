@@ -16,13 +16,15 @@
     @csrf
         <tr>
 
-            <td>用户名：</td><td><INPUT type="text" name="reg_name"></td>
+            <td>用户名：</td>
+            <td><input type="text" name="reg_name"></td>
 
         </tr>
 
         <tr>
 
-            <td>密码：</td><td><input type="password" name="reg_pwd"></td>
+            <td>密码：</td>
+            <td><input type="password" name="reg_pwd"></td>
 
         </tr>
 

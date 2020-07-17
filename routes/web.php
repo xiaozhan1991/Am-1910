@@ -19,3 +19,5 @@ Route::get("/user/reg","User\IndexController@reg");//注册
 Route::post("/user/regDo","User\IndexController@regDo");//执行注册
 Route::get("/user/log","User\IndexController@log");//登录
 Route::post("/user/logDo","User\IndexController@logDo");//执行登录
+
+Route::get("/user/center","User\IndexController@center");//个人中心
