@@ -4,7 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use DB;
+use App\Model\UserModel;
 class IndexController extends Controller
 {
     //注册
@@ -33,14 +33,14 @@ class IndexController extends Controller
        if(empty($reg_pwds)){
            die("确认密码不能为空");
        }
-
+       $pass = password_hash($reg_pwd,PASSWORD_BCRYPT);
         $data = [
             'reg_name' => $reg_name,
             'reg_email' => $reg_email,
-            'reg_pwd' => $reg_pwd,
+            'reg_pwd' => $pass,
         ];
        //入库
-       $ret = DB::table('reg')->insert($data);
+       $ret = UserModel::insert($data);
        if($ret){
        	echo "注册成功";
        	return redirect("/user/log");
@@ -60,11 +60,11 @@ class IndexController extends Controller
    {
       $reg_name = $request->input("reg_name");
       $reg_pwd = $request->input("reg_pwd");
-       
+
       //验证用户名
-      $reg_name = DB::table("reg")->where(['reg_name'=>$reg_name])->first();
+      $reg_name = UserModel::where(['reg_name'=>$reg_name])->first();
       //验证密码
-      $ret = password_verify($reg_pwd,$reg_name->reg_pwd); 
+      $ret = password_verify($reg_pwd,$reg_name->reg_pwd);
       if($ret){
       	echo "登录成功";
         return redirect("/user/log");
